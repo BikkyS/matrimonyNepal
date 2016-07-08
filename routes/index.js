@@ -7,11 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res){
-	res.render('login', { message: 'Welcome'});
+	res.render('login', { message: req.flash('loginMessage') });
 });
 
 router.get('/signup', function(req, res){
-	res.render('signup', { message: 'Wanna marry ?'});
+	res.render('signup', { message: req.flash('signupMessage') });
 });
 
 module.exports = router;
