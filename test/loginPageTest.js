@@ -1,9 +1,9 @@
 var chai = require('chai').assert;
 var request = require('request');
 
-describe('Homepage should respond to GET', function(done){
+describe('Login page should respond to GET', function(done){
 
-	var url = "http://localhost:8080";
+	var url = "http://localhost:8080/login";
 	
 	it('return status 200', function() {
 		request(url, function(err, res, body){
