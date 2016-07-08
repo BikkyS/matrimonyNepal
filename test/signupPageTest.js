@@ -1,7 +1,7 @@
 var chai = require('chai').assert;
 var request = require('request');
 
-describe('Signup Page should respond to GET', function(done){
+describe('Signup Page should respond to GET', function(){
 
 	var url = "http://localhost:8080/signup";
 	
@@ -10,5 +10,5 @@ describe('Signup Page should respond to GET', function(done){
 			expect(res.statusCode).to.equal(200);
 		});
 	});
-
+	
 });
