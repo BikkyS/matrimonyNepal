@@ -115,6 +115,10 @@ module.exports = function(app, passport){
 		res.redirect('/');
 	});
 
+	app.get('/publish', isLoggedIn, function(req, res){
+		res.render('publish.ejs', { user : req.user });
+	});
+
 }
 
 function isLoggedIn(req, res, next){
