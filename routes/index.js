@@ -2,6 +2,7 @@
 // var router = express.router();
 
 var User = require('../models/user');
+var Post = require('../models/post');
 
 module.exports = function(app, passport){
 	app.get('/', function(req, res){
@@ -116,7 +117,37 @@ module.exports = function(app, passport){
 	});
 
 	app.get('/publish', isLoggedIn, function(req, res){
-		res.render('publish.ejs', { user : req.user });
+		res.render('publish.ejs', { user : req.user, message: '' });
+	});
+
+	app.post('/publish', isLoggedIn, function(req, res){
+		console.log("USERID HERE " + req.user.id);
+
+		var newPost = new Post();
+		newPost._id = req.user.id;
+		newPost.name = req.body.name;
+		newPost.gender = req.body.gender;
+		newPost.age = req.body.age;
+		newPost.email = req.body.email;
+		newPost.phone = req.body.phone;
+		newPost.qualification = req.body.qualification;
+		newPost.lookingFor = req.body.lookingFor;
+		newPost.bio = req.body.bio;
+
+		newPost.save(function(err){
+			if (err)
+				throw err;
+		});
+
+		Post.find(req.user.id, function(err, post){
+			if(err){
+				throw err;
+			} else {
+				console.log("post form db: " + post);
+				res.render('publish.ejs', { user: req.user, message: 'Saved Successfully !' });
+			}
+		});
+
 	});
 
 }
