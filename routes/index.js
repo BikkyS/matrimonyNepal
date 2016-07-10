@@ -7,9 +7,10 @@ var Post = require('../models/post');
 module.exports = function(app, passport){
 	app.get('/', function(req, res){
 		Post.find({}, function(err, result){
-			if (err)
+			if (err) {
 				throw err;
-				res.render('index.ejs');
+				res.render('index.ejs', { post: ''});
+			}
 			res.render('index.ejs', { post : result });
 		});
 	});
