@@ -6,7 +6,11 @@ var Post = require('../models/post');
 
 module.exports = function(app, passport){
 	app.get('/', function(req, res){
-		res.render('index.ejs');
+		Post.find({}, function(err, result){
+			if (err)
+				throw err;
+			res.render('index.ejs', { post : result });
+		});
 	});
 
 	app.get('/login', function(req, res){
@@ -134,16 +138,19 @@ module.exports = function(app, passport){
 		newPost.lookingFor = req.body.lookingFor;
 		newPost.bio = req.body.bio;
 
-		newPost.save(function(err){
-			if (err)
-				throw err;
+		Post.findOneAndUpdate(req.user.id, newPost, { upsert: true}, function(err, doc){
+			if (err){
+				newPost.save(function(err){
+					if (err)
+						throw err;
+				});
+			}
 		});
 
 		Post.find(req.user.id, function(err, post){
 			if(err){
 				throw err;
 			} else {
-				console.log("post form db: " + post);
 				res.render('publish.ejs', { user: req.user, message: 'Saved Successfully !' });
 			}
 		});

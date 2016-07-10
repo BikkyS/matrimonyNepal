@@ -20,6 +20,25 @@
         <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
     </div>
 
+    <% if (post.length > 0) { %>
+        <% for (i = 0; i < post.length; i++) { %>
+            <div class="col-sm-6">
+                <div class="well">
+                    <p>
+                        <strong>Name : </strong><%= post[i].name %></br>
+                        <strong>Gender : </strong><%= post[i].gender %></br>
+                        <strong>Age : </strong><%= post[i].age %></br>
+                        <strong>Email : </strong><%= post[i].email %></br>
+                        <strong>Phone : </strong><%= post[i].phone %></br>
+                        <strong>Qualification : </strong><%= post[i].qualification %></br>
+                        <strong>Looking for : </strong><%= post[i].lookingFor %></br>
+                        <strong>Bio : </strong><%= post[i].bio %></br>
+                    </p>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+
     <div class="col-sm-6">
         <div class="well">
             <p>
