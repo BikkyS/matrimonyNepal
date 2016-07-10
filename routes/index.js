@@ -81,17 +81,17 @@ module.exports = function(app, passport){
                 failureRedirect : '/'
             }));
 
-	app.get('/unlink/local', function(req, res){
-		var user = req.user;
-		user.local.username = null;
-		user.local.password = null;
+	// app.get('/unlink/local', function(req, res){
+	// 	var user = req.user;
+	// 	user.local.username = null;
+	// 	user.local.password = null;
 
-		user.save(function(err){
-			if(err)
-				throw err;
-			res.redirect('/profile');
-		})
-	});
+	// 	user.save(function(err){
+	// 		if(err)
+	// 			throw err;
+	// 		res.redirect('/profile');
+	// 	})
+	// });
 
 	app.get('/unlink/facebook', function(req, res){
 		var user = req.user;
