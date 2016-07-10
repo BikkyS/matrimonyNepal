@@ -9,6 +9,7 @@ module.exports = function(app, passport){
 		Post.find({}, function(err, result){
 			if (err)
 				throw err;
+				res.render('index.ejs');
 			res.render('index.ejs', { post : result });
 		});
 	});
