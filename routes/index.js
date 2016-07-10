@@ -8,8 +8,8 @@ module.exports = function(app, passport){
 	app.get('/', function(req, res){
 		Post.find({}, function(err, result){
 			if (err) {
-				throw err;
 				res.render('index.ejs', { post: ''});
+				throw err;
 			}
 			res.render('index.ejs', { post : result });
 		});
