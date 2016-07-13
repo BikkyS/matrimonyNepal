@@ -41,11 +41,3 @@ a {
 #upload-input {
   display: none;
 }
-
-#card-left {
-	float: left;
-}
-
-#card-right {
-	float: right;
-}

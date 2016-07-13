@@ -27,7 +27,7 @@
             <div class="col-sm-6">
                 <div class="well">
                     <h4 class="alert alert-success">AVAILABLE</h4>
-                    <div id="card-left">
+                    <div style="float: left;">
                         <p>
                             <strong>Name : </strong><%= post[i].name %></br>
                             <strong>Gender : </strong><%= post[i].gender %></br>
@@ -39,9 +39,10 @@
                             <strong>Bio : </strong><%= post[i].bio %></br>
                         </p>
                     </div>
-                    <div id="card-right">
-                        <img src='<%= post[i]._id %>.png' class="img-rounded" alt="<%= post[i].name %>"  width="150" height="150">
+                    <div style="float: right;">
+                        <a href="<%= post[i]._id %>.png"><img src='<%= post[i]._id %>.png' class="img-rounded" alt="<%= post[i].name %>"  width="150" height="150"></a>
                     </div>
+                    <div style="clear: both;"></div>
                 </div>
             </div>
         <% } %>
