@@ -5,6 +5,7 @@
     <link rel="shortcut icon" href="images/marriage.png" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link href="stylesheets/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -26,16 +27,22 @@
             <div class="col-sm-6">
                 <div class="well">
                     <h4 class="alert alert-success">AVAILABLE</h4>
-                    <p>
-                        <strong>Name : </strong><%= post[i].name %></br>
-                        <strong>Gender : </strong><%= post[i].gender %></br>
-                        <strong>Age : </strong><%= post[i].age %></br>
-                        <strong>Email : </strong><%= post[i].email %></br>
-                        <strong>Phone : </strong><%= post[i].phone %></br>
-                        <strong>Qualification : </strong><%= post[i].qualification %></br>
-                        <strong>Looking for : </strong><%= post[i].lookingFor %></br>
-                        <strong>Bio : </strong><%= post[i].bio %></br>
-                    </p>
+                    <div id="card-left">
+                        <p>
+                            <strong>Name : </strong><%= post[i].name %></br>
+                            <strong>Gender : </strong><%= post[i].gender %></br>
+                            <strong>Age : </strong><%= post[i].age %></br>
+                            <strong>Email : </strong><%= post[i].email %></br>
+                            <strong>Phone : </strong><%= post[i].phone %></br>
+                            <strong>Qualification : </strong><%= post[i].qualification %></br>
+                            <strong>Looking for : </strong><%= post[i].lookingFor %></br>
+                            <strong>Bio : </strong><%= post[i].bio %></br>
+                        </p>
+                    </div>
+                    <div id="card-right">
+                        <img src='<%= post[i]._id %>.png'>
+                    </div>
+                    
                 </div>
             </div>
         <% } %>

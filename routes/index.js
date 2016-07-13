@@ -1,5 +1,8 @@
 // var express = require('express');
 // var router = express.router();
+var path = require('path');
+var formidable = require('formidable');
+var fs = require('fs');
 
 var User = require('../models/user');
 var Post = require('../models/post');
@@ -138,22 +141,53 @@ module.exports = function(app, passport){
 		newPost.lookingFor = req.body.lookingFor;
 		newPost.bio = req.body.bio;
 
-		Post.findOneAndUpdate(req.user.id, newPost, { upsert: true}, function(err, doc){
+		Post.findOneAndUpdate(req.user.id, newPost, { upsert: true }, function(err, doc){
 			if (err){
-				newPost.save(function(err){
-					if (err)
-						throw err;
+				newPost.save(function(error){
+					if (error)
+						throw "Saving error ++++++++++++++++" + error;
 				});
 			}
 		});
 
 		Post.find(req.user.id, function(err, post){
 			if(err){
-				throw err;
+				throw "Post find error: ++++++++++++++++++" + err;
 			} else {
 				res.render('publish.ejs', { user: req.user, message: 'Saved Successfully !' });
 			}
 		});
+
+	});
+
+	app.post('/upload', isLoggedIn, function(req, res){
+		// create an incoming form object
+	  var form = new formidable.IncomingForm();
+
+	  // specify that we want to allow the user to upload multiple files in a single request
+	  form.multiples = true;
+
+	  // store all uploads in the /uploads directory
+	  form.uploadDir = path.join(__dirname, '../uploads');
+
+	  // every time a file has been uploaded successfully,
+	  // rename it to it's orignal name
+	  form.on('file', function(field, file) {
+	    fs.rename(file.path, path.join(form.uploadDir, req.user.id +'.png'));
+	  });
+
+	  // log any errors that occur
+	  form.on('error', function(err) {
+	    console.log('An error has occured: \n' + err);
+	  });
+
+	  // once all the files have been uploaded, send a response to the client
+	  form.on('end', function() {
+	    res.end('success');
+	  });
+
+	  // parse the incoming request containing the form data
+	  form.parse(req);
 
 	});
 
