@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Matrimony Nepal</title>
-    <link rel="shortcut icon" href="images/marriage.png" />
+    <link rel="shortcut icon" href="images/marriage.ico" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> <!-- load fontawesome -->
     <link href="stylesheets/style.css" rel="stylesheet">
@@ -40,9 +40,8 @@
                         </p>
                     </div>
                     <div id="card-right">
-                        <img src='<%= post[i]._id %>.png'>
+                        <img src='<%= post[i]._id %>.png' class="img-rounded" alt="<%= post[i].name %>"  width="150" height="150">
                     </div>
-                    
                 </div>
             </div>
         <% } %>
