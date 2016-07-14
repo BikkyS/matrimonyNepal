@@ -131,32 +131,59 @@ module.exports = function(app, passport){
 		console.log("USERID HERE " + req.user.id);
 
 		var newPost = new Post();
-		newPost._id = req.user.id;
-		newPost.name = req.body.name;
-		newPost.gender = req.body.gender;
-		newPost.age = req.body.age;
-		newPost.email = req.body.email;
-		newPost.phone = req.body.phone;
-		newPost.qualification = req.body.qualification;
-		newPost.lookingFor = req.body.lookingFor;
-		newPost.bio = req.body.bio;
 
-		Post.findOneAndUpdate(req.user.id, newPost, { upsert: true }, function(err, doc){
-			if (err){
-				newPost.save(function(error){
+		Post.findOne({ _id : req.user.id }, function(err, doc){
+			if (err)
+				throw err;
+			
+			console.log("This is doc ===== " +doc);
+
+			if (doc === null){
+				console.log("NULL section")
+				newPost._id = req.user.id;
+				newPost.name = req.body.name;
+				newPost.gender = req.body.gender;
+				newPost.age = req.body.age;
+				newPost.email = req.body.email;
+				newPost.phone = req.body.phone;
+				newPost.qualification = req.body.qualification;
+				newPost.lookingFor = req.body.lookingFor;
+				newPost.bio = req.body.bio;
+
+				newPost.save(function(error, result){
 					if (error)
-						throw "Saving error ++++++++++++++++" + error;
+						throw error;
+					res.render('publish.ejs', { user: req.user, message: 'Saved Successfully !' });
+				});
+
+			} else {
+				doc._id = req.user.id;
+				doc.name = req.body.name;
+				doc.gender = req.body.gender;
+				doc.age = req.body.age;
+				doc.email = req.body.email;
+				doc.phone = req.body.phone;
+				doc.qualification = req.body.qualification;
+				doc.lookingFor = req.body.lookingFor;
+				doc.bio = req.body.bio;
+
+				doc.save(function(err, result){
+					if (err)
+						throw "doc.save error ++++++++++++++" + err;
+					else 
+						res.render('publish.ejs', { user: req.user, message: 'Saved Successfully !' });
 				});
 			}
+
 		});
 
-		Post.find(req.user.id, function(err, post){
-			if(err){
-				throw "Post find error: ++++++++++++++++++" + err;
-			} else {
-				res.render('publish.ejs', { user: req.user, message: 'Saved Successfully !' });
-			}
-		});
+		// Post.find(req.user.id, function(err, post){
+		// 	if(err){
+		// 		throw "Post find error: ++++++++++++++++++" + err;
+		// 	} else {
+		// 		res.render('publish.ejs', { user: req.user, message: 'Saved Successfully !' });
+		// 	}
+		// });
 
 	});
 
