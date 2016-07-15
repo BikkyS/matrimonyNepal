@@ -9,7 +9,7 @@ var should = chai.should();
 
 chai.use(chaiHttp);
 
-var server = ('../app');
+var server = require('../app');
 var User = require('../models/user');
 var Post = require('../models/post');
 
@@ -39,11 +39,13 @@ describe('Routes before logging in', function(){
 		done();
 	});
 
-	it('should list ALL posts on / GET', function(done){
+	it('should list ALL posts on / GET', function(){
 		chai.request(server)
 			.get('/')
 			.end(function(err, res){
+				if (err)
 				res.should.have.status(200);
+				res.should.be.json;
 				done();
 			});
 	});
