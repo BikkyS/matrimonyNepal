@@ -13,7 +13,13 @@ var flash = require('connect-flash');
 var MongoStore = require('connect-mongo')(session);
 
 var configDB = require('./config/database.js');
-mongoose.connect(configDB.url);
+mongoose.connect(configDB.mongoURI[app.settings.env], function(err, res){
+  if (err) {
+    console.log('Error connecting to the database. ' + err);
+  } else {
+    console.log('Connected to Database: ' + configDB.mongoURI[app.settings.env]);
+  }
+});
 
 require('./config/passport')(passport);
 
