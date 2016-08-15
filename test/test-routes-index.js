@@ -43,7 +43,6 @@ describe('Routes before logging in', function(){
 		chai.request(server)
 			.get('/')
 			.end(function(err, res){
-				if (err)
 				res.should.have.status(200);
 				res.should.be.json;
 				done();

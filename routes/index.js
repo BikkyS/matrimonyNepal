@@ -12,12 +12,12 @@ module.exports = function(app, passport){
 		Post.find({}, function(err, result){
 			if (err)
 				throw err;
-			if (process.env.NODE_ENV == 'test') {
-				res.json(result);
-				console.log("Result is : " + result);
-			} else {
-				res.render('index.ejs', { post : result });	
-			}
+			// if (process.env.NODE_ENV == 'test') {
+			// 	res.json(result);
+			// } else {
+			// 	res.render('index.ejs', { post : result });	
+			// }
+			res.render('index.ejs', { post : result });
 		});
 	});
 
